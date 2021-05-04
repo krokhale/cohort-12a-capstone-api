@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 let models = require('../lib/models');
-console.log(models)
+// console.log(models)
 
 // Create question - POST - /api/v1/questions
 // Create answer - POST - /api/v1/answers
@@ -14,38 +14,42 @@ console.log(models)
 // Fetch categories - GET - /api/v1/categories
 router.get('/categories', async function(req, res, next) {
     // write some code here to fetch the categories
-
-    res.json({success: true});
+    let categories = await models.Category.findAll({})
+    res.json(categories);
 });
 
 
 // Fetch questions - GET - /api/v1/questions
-router.get('/questions', async function(req, res, next) {
+// /categories/2/questions
+// /categories/3/questions
+router.get(`/categories/:categoryId/questions`, async function(req, res, next) {
     // write some code here to fetch the questions
-
-    res.json({success: true});
+    let questions = await models.Question.findAll({where: {categoryId: req.params.categoryId}})
+    res.json(questions);
 });
 
 // Fetch answers - GET - /api/v1/answers
-router.get('/answers', async function(req, res, next) {
+router.get('/questions/:questionId/answers', async function(req, res, next) {
     // write some code here to fetch the answers
-
-    res.json({success: true});
+    let answers = await models.Answer.findAll({where: {questionId: req.params.questionId}})
+    res.json(answers);
 });
 
 
 
 // Create question - POST - /api/v1/questions
-router.post('/questions', async function(req, res, next) {
+router.post('/categories/:categoryId/questions', async function(req, res, next) {
     // write some code here to create a question
-    res.json({success: true});
+    let question = await models.Question.create({questionTxt: req.body.questionTxt, categoryId: req.params.categoryId});
+    res.json(question);
 });
 
 
 // Create answer - POST - /api/v1/answers
-router.post('/answers', async function(req, res, next) {
+router.post('/questions/:questionId/answers', async function(req, res, next) {
     // write some code here to create an answer
-    res.json({success: true});
+    let answer = await models.Answer.create({answerTxt: req.body.questionTxt, questionId: req.params.questionId});
+    res.json(answer);
 });
 
 
