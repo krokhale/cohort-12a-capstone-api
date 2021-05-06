@@ -4,6 +4,44 @@ var router = express.Router();
 let models = require('../lib/models');
 // console.log(models)
 
+
+
+// router.get(
+//     '/profile',
+//     async (req, res, next) => {
+//         console.log('req.user is', req.user);
+//         // write code like find the user where the email id is this
+//         let u = await models.User.findOne({where: {email: req.user.email}});
+//
+//         res.json({
+//             message: 'You made it to the secure route',
+//             // user: req.user,
+//             user: u,
+//             token: req.query.token
+//         })
+//     }
+// );
+//
+// router.get(
+//     '/users/me',
+//     async (req, res, next) => {
+//         console.log('req.user is', req.user);
+//         // write code like find the user where the email id is this
+//
+//         let u = await models.User.findOne({where: {email: req.user.email}});
+//         res.json({
+//             message: 'You made it to the secure route',
+//             // user: req.user,
+//             userId: u.id,
+//             token: req.query.token
+//         })
+//     }
+// );
+
+
+
+
+
 // Create question - POST - /api/v1/questions
 // Create answer - POST - /api/v1/answers
 // Fetch categories - GET - /api/v1/categories
